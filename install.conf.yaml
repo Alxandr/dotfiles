@@ -1,0 +1,50 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+    shell:
+      stderr: true
+
+- clean:
+    - '~'
+    - '~/.config'
+    - '~/.oh-my-zsh/custom/'
+    - '~/.oh-my-zsh/custom/plugins/'
+
+- shell:
+    - [sh pre-install.sh, Running pre installation script]
+
+# Most dotfiles
+- link:
+    ~/.bash:
+    ~/.bash_profile:
+    ~/.bashrc:
+      force: true
+      path: zshrc
+    ~/.dotfiles: ''
+    ~/.gitconfig:
+    ~/.gitignore_global:
+    ~/.gnupg/gpg.conf:
+    ~/.shell:
+    ~/.zsh:
+    ~/.zshrc:
+      force: true
+      path: zshrc
+
+- shell:
+    - cp -r shell/plugins/nvm ~/.nvm
+    - git submodule sync --recursive
+    # the following have to run after linking ~/.gitconfig
+    - git submodule update --init --recursive
+    - >
+      git clean -fdx
+      zsh/oh-my-zsh/plugins/
+
+- link:
+    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: zsh/oh-my-zsh/plugins/zsh-autosuggestions/
+    ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: zsh/oh-my-zsh/plugins/zsh-syntax-highlighting/
+
+- shell:
+    # restrict file permissions for zsh plugin directories
+    - chmod -R 0755 ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    - chmod -R 0755 ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
