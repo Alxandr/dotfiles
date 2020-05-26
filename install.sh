@@ -3,3 +3,6 @@ if [ ! -d "/root/.oh-my-zsh" ]; then
 fi
 
 curl -fsSL https://starship.rs/install.sh | bash -s -- -y
+
+rm -f ~/.zshrc
+ln -s ./.zshrc ~/.zshrc
