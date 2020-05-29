@@ -43,3 +43,8 @@ up() {
 
 # Mirror stdout to stderr, useful for seeing data going through a pipe
 alias peek='tee >(cat 1>&2)'
+
+# hub (if it exists)
+if [ -x "$(command -v hub)" ]; then
+  alias git='hub'
+fi

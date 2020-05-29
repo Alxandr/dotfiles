@@ -1,3 +1,6 @@
+# Locale
+source ~/.shell/locale.sh
+
 # Functions
 source ~/.shell/functions.sh
 
