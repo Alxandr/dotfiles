@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+if [ "$#" -eq 0 ]; then
+  BRANCH="$CURRENT_BRANCH"
+  ORIGIN="origin"
+elif [ "$#" -eq 1 ]; then
+  BRANCH="$1"
+  ORIGIN="origin"
+elif [ "$#" -eq 2 ]; then
+  BRANCH="$2"
+  ORIGIN="$1"
+else
+  echo "Usage: git checkout-latest [origin] [branch]"
+  exit 1
+fi
+
+#echo "Origin=$ORIGIN, Branch=$BRANCH"
+
+if [[ -n $(git status -s) ]]; then
+  echo "Working dir dirty"
+  exit 1
+fi
+
+if [[ "$BRANCH" == "$CURRENT_BRANCH" ]]; then
+  git pull "$ORIGIN" "$BRANCH"
+else
+  git fetch "$ORIGIN" "$BRANCH:$BRANCH"
+  git checkout "$BRANCH"
+fi

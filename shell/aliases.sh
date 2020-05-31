@@ -1,5 +1,7 @@
 # Use colors in coreutils utilities output
-alias ls='ls --color=auto'
+if ls --color=auto >/dev/null 2>/dev/null; then
+  alias ls='ls --color=auto'
+fi
 alias grep='grep --color'
 
 # ls aliases

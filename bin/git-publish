@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+git push -u "${1:-origin}" "$(git rev-parse --abbrev-ref HEAD)"
