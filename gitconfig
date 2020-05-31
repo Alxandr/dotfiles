@@ -8,7 +8,7 @@ context = normal
 filename = magenta
 linenumber = green
 separator = yellow
-function =() blue
+function = blue
 
 [pretty]
 line = "%C(auto)%h %<|(60,trunc)%s %C(green)%ad%C(auto)%d"
