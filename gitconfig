@@ -25,6 +25,11 @@ useConfigOnly = true
 name = Aleksander Heintz
 email = alxandr@alxandr.me
 
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
+
 [http]
 cookieFile = ~/.gitcookies
 
