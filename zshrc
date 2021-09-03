@@ -23,6 +23,9 @@ source ~/.zsh/settings.zsh
 # Bootstrap
 source ~/.shell/bootstrap.sh
 
+# PGP
+source ~/.shell/pgp.sh
+
 # Aliases
 source ~/.shell/aliases.sh
 

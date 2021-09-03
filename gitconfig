@@ -26,9 +26,9 @@ name = Aleksander Heintz
 email = alxandr@alxandr.me
 
 [commit]
-	gpgsign = true
+gpgsign = true
 [tag]
-	gpgSign = true
+gpgSign = true
 
 [http]
 cookieFile = ~/.gitcookies
