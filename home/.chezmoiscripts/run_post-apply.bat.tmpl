@@ -1,0 +1,7 @@
+{{ if eq .chezmoi.os `windows` }}
+start "link-external" /B /WAIT pwsh.exe -NoLogo -Command "& '{{ .chezmoi.workingTree }}/scripts/link-external.ps1'"
+{{ end }}
+{{ if false }}
+REM start "PSmodules-installation" /B /WAIT pwsh.exe -NoLogo -Command "& $PWD\modulesps-installation.ps1"
+REM start "upgrade-all" /B /WAIT powershell.exe -NoLogo -NoProfile -Command "& $PWD\upgrade-all.ps1"
+{{ end }}

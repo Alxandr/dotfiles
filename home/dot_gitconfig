@@ -24,6 +24,7 @@ helper = cache --timeout=3600
 useConfigOnly = true
 name = Aleksander Heintz
 email = alxandr@alxandr.me
+signingKey = CBC4D2667013D38D
 
 [commit]
 gpgsign = true
