@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+ORIGIN="${1:-origin}"
+BRANCH=$(git ls-remote --symref "${ORIGIN}" HEAD | awk '/^ref:/ {sub(/refs\/heads\//, "", $2); print $2}')
+# echo "branch: ${BRANCH}"
+
+git fetch "${ORIGIN}" "${BRANCH}:${BRANCH}"
