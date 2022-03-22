@@ -1,3 +1,6 @@
+[alias]
+wip = commit -am 'WIP'
+
 [color]
 ui = auto
 
@@ -38,3 +41,5 @@ cookieFile = ~/.gitcookies
 # Allow local customizations in the .gitconfig_local file
 [include]
 path = ~/.gitconfig_local
+
+

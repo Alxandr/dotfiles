@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 # Use colors in coreutils utilities output
 if ls --color=auto >/dev/null 2>/dev/null; then
   alias ls='ls --color=auto'
@@ -49,4 +51,9 @@ alias peek='tee >(cat 1>&2)'
 # hub (if it exists)
 if [ -x "$(command -v hub)" ]; then
   alias git='hub'
+fi
+
+# bat (if it exists)
+if [ -x "$(command -v bat)" ]; then
+  alias cat='bat --style=plain --paging=never'
 fi
