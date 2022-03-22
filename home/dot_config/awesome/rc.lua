@@ -18,6 +18,9 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+local home_path = os.getenv("HOME")
+local wallpaper_dir = home_path .. "/Pictures/Backgrounds"
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -149,16 +152,53 @@ local tasklist_buttons = gears.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-local function set_wallpaper(s)
-    -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
+local function get_random_wallpaper()
+    local Gio = require("lgi").Gio
+    local valid_exts = {}
+    valid_exts["jpg"] = true
+    valid_exts["png"] = true
+    valid_exts["bmp"] = true
+
+    -- Build a table of files from the path with the required extensions
+    local file_list = Gio.File.new_for_path(wallpaper_dir):enumerate_children("standard::*", 0)
+    -- return gears.filesystem.get_random_file_from_dir(wallpaper_dir, {"jpg", "png", "bmp"}, true)
+
+    local files = {}
+    for file in function() return file_list:next_file() end do
+        if file:get_file_type() == "REGULAR" then
+            local file_name = file:get_display_name()
+
+            if valid_exts[file_name:lower():match(".+%.(.*)$") or ""] then
+                table.insert(files, file_name)
+            end
         end
-        gears.wallpaper.maximized(wallpaper, s, true)
     end
+
+    -- Return a randomly selected filename from the file table
+    local file = files[math.random(#files)]
+
+    return wallpaper_dir:gsub("[/]*$", "") .. "/" .. file
+end
+
+local selected_wallpaper = nil
+
+local function set_wallpaper(s)
+    if selected_wallpaper == nil then
+      selected_wallpaper = get_random_wallpaper()
+    end
+
+    gears.wallpaper.maximized(selected_wallpaper, s, true)
+
+    -- -- Wallpaper
+    -- if beautiful.wallpaper then
+    --     local wallpaper = beautiful.wallpaper
+    --     -- If wallpaper is a function, call it with the screen
+    --     if type(wallpaper) == "function" then
+    --         wallpaper = wallpaper(s)
+    --     end
+    --     gears.wallpaper.maximized(wallpaper, s, true)
+    -- end
+    -- Set wallpaper
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -562,9 +602,6 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-
--- Set wallpaper
-awful.spawn.with_shell("nitrogen --set-zoom-fill --random ~/Pictures/Backgrounds")
 
 -- Launch daemons
 awful.spawn.single_instance("picom")
