@@ -9,3 +9,6 @@ elif [ $(uname -a | grep -c "microsoft") -eq 1 ]; then
 else
   export ISWSL=0
 fi
+
+# Set docker buildkit env
+export DOCKER_BUILDKIT=1
