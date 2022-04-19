@@ -1,31 +1,31 @@
-# [".oh-my-zsh"]
-# type = "archive"
-# url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
+[".oh-my-zsh"]
+type = "git-repo"
+url = "https://github.com/ohmyzsh/ohmyzsh.git"
 # exact = false
 # stripComponents = 1
-# refreshPeriod = "168h"
+refreshPeriod = "168h"
 
-# [".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
-# type = "archive"
-# url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz"
+[".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
+type = "git-repo"
+url = "https://github.com/zsh-users/zsh-syntax-highlighting.git"
 # exact = false
 # stripComponents = 1
-# refreshPeriod = "168h"
+refreshPeriod = "168h"
 
 
-# [".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
-# type = "archive"
-# url = "https://github.com/zsh-users/zsh-autosuggestions/archive/master.tar.gz"
+[".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+type = "git-repo"
+url = "https://github.com/zsh-users/zsh-autosuggestions.git"
 # exact = false
 # stripComponents = 1
-# refreshPeriod = "168h"
+refreshPeriod = "168h"
 
-# [".config/shell/plugins/dircolors-solarized"]
-# type = "archive"
-# url = "https://github.com/seebi/dircolors-solarized/archive/master.tar.gz"
+[".config/shell/plugins/dircolors-solarized"]
+type = "git-repo"
+url = "https://github.com/seebi/dircolors-solarized.git"
 # exact = false
 # stripComponents = 1
-# refreshPeriod = "168h"
+refreshPeriod = "168h"
 
 # [".nvm"]
 # type = "archive"

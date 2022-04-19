@@ -57,3 +57,8 @@ fi
 if [ -x "$(command -v bat)" ]; then
   alias cat='bat --style=plain --paging=never'
 fi
+
+# exa (if it exists)
+if [ -x "$(command -v exa)" ]; then
+  alias ls='exa'
+fi
