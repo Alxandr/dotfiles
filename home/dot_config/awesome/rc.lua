@@ -583,3 +583,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Launch daemons
 awful.spawn.single_instance("picom")
+awful.spawn.single_instance("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
