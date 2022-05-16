@@ -26,11 +26,11 @@ source ~/.config/shell/bootstrap.sh
 # PGP
 source ~/.config/shell/pgp.sh
 
-# Aliases
-source ~/.config/shell/aliases.sh
-
 # Oh-My-ZSH
 source ~/.config/zsh/oh-my-zsh.zsh
+
+# Aliases
+source ~/.config/shell/aliases.sh
 
 # Custom prompt
 source ~/.config/zsh/prompt.zsh
