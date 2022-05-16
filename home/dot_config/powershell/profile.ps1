@@ -41,3 +41,14 @@ Add-Path -Prepend "$HOME/.local/bin"
 
 # prompt
 Invoke-Expression (&starship init powershell)
+
+# zoxide (if it exists)
+If (Test-CommandExists zoxide) {
+  Invoke-Expression (& {
+      $hook = if ($PSVersionTable.PSVersion.Major -lt 6) { 'prompt' } else { 'pwd' }
+      (zoxide init --hook $hook powershell | Out-String)
+    }
+  )
+
+  Set-Alias zz "z -"
+}

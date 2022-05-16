@@ -17,3 +17,18 @@ function Add-Path {
     $env:Path = "$env:Path;$Resolved"
   }
 }
+
+Function Test-CommandExists {
+
+  Param ([Parameter()][string]$command)
+
+  $oldPreference = $ErrorActionPreference
+
+  $ErrorActionPreference = ‘stop’
+
+  try { if (Get-Command $command) { Return $true } }
+
+  Catch { Return $false }
+
+  Finally { $ErrorActionPreference = $oldPreference }
+}

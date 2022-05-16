@@ -59,9 +59,3 @@ if [ -x "$(command -v exa)" ]; then
   alias ll='exa -lh'
   alias tree='exa --tree'
 fi
-
-# zoxide (if it exists)
-if [ -x "$(command -v zoxide)" ]; then
-  alias z='zoxide'
-  alias zz='z -'
-fi
