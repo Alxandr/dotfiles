@@ -1,4 +1,4 @@
-function Add-Path {
+Function Add-Path {
   [CmdletBinding(PositionalBinding = $false)]
   param (
     [Parameter()]

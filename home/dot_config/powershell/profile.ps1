@@ -42,6 +42,10 @@ Add-Path -Prepend "$HOME/.local/bin"
 # prompt
 Invoke-Expression (&starship init powershell)
 
+Function __Z_BACK {
+  z -
+}
+
 # zoxide (if it exists)
 If (Test-CommandExists zoxide) {
   Invoke-Expression (& {
@@ -50,5 +54,5 @@ If (Test-CommandExists zoxide) {
     }
   )
 
-  Set-Alias zz "z -"
+  Set-Alias zz __Z_BACK
 }
