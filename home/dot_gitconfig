@@ -17,6 +17,9 @@ function = blue
 line = "%C(auto)%h %<|(60,trunc)%s %C(green)%ad%C(auto)%d"
 detail = "%C(auto)%h %s%n  %C(yellow)by %C(blue)%an %C(magenta)<%ae> [%G?] %C(green)%ad%n %C(auto)%d%n"
 
+[init]
+defaultBranch = "main"
+
 [push]
 default = upstream
 
@@ -41,5 +44,3 @@ cookieFile = ~/.gitcookies
 # Allow local customizations in the .gitconfig_local file
 [include]
 path = ~/.gitconfig_local
-
-
