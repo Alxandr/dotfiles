@@ -1,5 +1,10 @@
+# shellcheck shell=bash
+
 path_prepend "$HOME/.local/bin"
 path_prepend "$HOME/.cargo/bin"
+
+export PNPM_HOME="$HOME/.local/share/pnpm"
+path_prepend "$PNPM_HOME"
 
 # detect WSL
 if [ $(uname -a | grep -c "Microsoft") -eq 1 ]; then
