@@ -40,6 +40,7 @@ if ($PWD -eq "C:\Windows\System32") {
 Add-Path -Prepend "$HOME/.local/bin"
 
 # prompt
+$Env:STARSHIP_CONFIG = (Join-Path $PSScriptRoot "starship.toml")
 Invoke-Expression (&starship init powershell)
 
 Function __Z_BACK {
