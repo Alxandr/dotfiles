@@ -51,6 +51,7 @@ fi
 # bat (if it exists)
 if [ -x "$(command -v bat)" ]; then
   alias cat='bat --style=plain --paging=never'
+  alias catmore='bat --style=plain --paging=always'
 fi
 
 # exa (if it exists)

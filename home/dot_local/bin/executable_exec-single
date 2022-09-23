@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+PROGRAM=$1
+FULL=$*
+echo "program: $PROGRAM"
+echo "exec: $FULL"
+
+# Terminate already running instances
+killall -q "$PROGRAM"
+
+# Wait until the processes have been shut down
+while pgrep -x "$PROGRAM" >/dev/null; do
+  sleep 1
+  killall -qs SIGKILL "$PROGRAM"
+done
+
+# Launch main
+exec "$FULL"

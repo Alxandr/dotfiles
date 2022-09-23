@@ -50,3 +50,8 @@ fi
 if [ -f ~/.zshrc_local_after ]; then
   source ~/.zshrc_local_after
 fi
+
+# If neofetch is installed, run it
+if [ -x "$(command -v neofetch)" ]; then
+  neofetch
+fi
