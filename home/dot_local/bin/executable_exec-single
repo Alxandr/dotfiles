@@ -15,4 +15,5 @@ while pgrep -x "$PROGRAM" >/dev/null; do
 done
 
 # Launch main
-exec "$FULL"
+$FULL &
+disown -a
