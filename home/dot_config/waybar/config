@@ -1,5 +1,5 @@
 {
-  "layer": "bottom",
+  "layer": "top",
   "position": "top",
   "height": 34,
   "modules-left": [
@@ -55,6 +55,7 @@
     "tooltip": false
   },
   "battery": {
+    "bat": "BAT0",
     "format": "{capacity}% {icon}",
     "format-alt": "{time} {icon}",
     "format-icons": [
@@ -73,7 +74,7 @@
     "tooltip": true
   },
   "temperature": {
-    "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+    "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input",
     "critical-threshold": 80,
     "format-critical": "{temperatureC}° ",
     "format": "{temperatureC}° "
