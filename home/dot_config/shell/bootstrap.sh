@@ -2,12 +2,16 @@
 
 path_prepend "$HOME/.local/bin"
 path_prepend "$HOME/.cargo/bin"
+path_prepend "$HOME/.depot/bin"
 
 export PNPM_HOME="$HOME/.local/share/pnpm"
 path_prepend "$PNPM_HOME"
 
 export N_PREFIX="$HOME/.local/share/node"
 path_prepend "$N_PREFIX/bin"
+
+export TURSO_HOME="$HOME/.turso"
+path_prepend "$TURSO_HOME"
 
 # detect WSL
 if [ "$(uname -a | grep -c "Microsoft")" -eq 1 ]; then

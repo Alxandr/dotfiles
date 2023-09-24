@@ -54,9 +54,9 @@ if [ -x "$(command -v bat)" ]; then
   alias catmore='bat --style=plain --paging=always'
 fi
 
-# exa (if it exists)
-if [ -x "$(command -v exa)" ]; then
-  alias ls='exa'
-  alias ll='exa -lh'
-  alias tree='exa --tree'
+# eza (if it exists)
+if [ -x "$(command -v eza)" ]; then
+  alias ls='eza'
+  alias ll='eza -lh'
+  alias tree='eza --tree'
 fi

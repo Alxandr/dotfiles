@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+coords="$(slurp -b '#00000060' -s '#00000000' -c '#ffffffff')"
+sleep 1s
+grim -g "$coords" - | wl-copy
