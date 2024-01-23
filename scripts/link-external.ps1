@@ -80,6 +80,11 @@ $powershell_core = [PSCustomObject]@{
 #   Recursive = $false
 # }
 
+# Ensure powershell config folder exists
+if ( -not (Test-Path $powershell_core.Dst)) {
+  New-Item -Path $powershell_core.Dst -ItemType Directory -Force
+}
+
 $dst = @($powershell_core)
 
 foreach ($d in $dst) {
@@ -88,7 +93,7 @@ foreach ($d in $dst) {
   }
   else {
     if ( -not (Test-Path $d.Dst)) {
-      Write-Warning "$($d.Name) not installed. Skipping $($d.Name) configuration.";
+      Write-Warning "$($d.Name) target folder ($($d.Dst)) not found. Check for errors. Skipping $($d.Name) configuration.";
     }
     else {
       Write-Output "Starting $($d.Name) configuration..."

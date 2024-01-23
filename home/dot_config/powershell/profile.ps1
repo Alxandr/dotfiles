@@ -40,15 +40,17 @@ if ($PWD -eq "C:\Windows\System32") {
 Add-Path -Prepend "$HOME/.local/bin"
 
 # prompt
-$Env:STARSHIP_CONFIG = (Join-Path $PSScriptRoot "starship.toml")
-Invoke-Expression (&starship init powershell)
-
-Function __Z_BACK {
-  z -
+If (Test-CommandExists starship) {
+  $Env:STARSHIP_CONFIG = (Join-Path $PSScriptRoot "starship.toml")
+  Invoke-Expression (&starship init powershell)
 }
 
 # zoxide (if it exists)
 If (Test-CommandExists zoxide) {
+  Function __Z_BACK {
+    z -
+  }
+
   Invoke-Expression (& {
       $hook = if ($PSVersionTable.PSVersion.Major -lt 6) { 'prompt' } else { 'pwd' }
       (zoxide init --hook $hook powershell | Out-String)
@@ -56,4 +58,21 @@ If (Test-CommandExists zoxide) {
   )
 
   Set-Alias zz __Z_BACK
+}
+
+# bat (if it exists)
+If (Test-CommandExists bat) {
+  Function BatDefault {
+    bat --style=plain --paging=never $args
+  }
+
+  Function BatMore {
+    bat --style=plain --paging=always $args
+  }
+
+  Set-Alias cat BatDefault
+  Set-Alias catmore BatMore
+} Else {
+  Set-Alias cat Get-Content
+  Set-Alias catmore Get-Content
 }
