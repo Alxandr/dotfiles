@@ -1,0 +1,16 @@
+[".cache/chezmoi/fonts/delugia-mono-complete"]
+type = "archive"
+url = "https://github.com/adam7/delugia-code/releases/latest/download/delugia-mono-complete.zip"
+format = "zip"
+exact = true
+stripComponents = 1
+refreshPeriod = "168h"
+
+[".cache/chezmoi/fonts/fira-code"]
+type = "archive"
+url = "https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip"
+format = "zip"
+exact = true
+stripComponents = 1
+refreshPeriod = "168h"
+include = ["**/*.ttf"]

@@ -1,5 +1,5 @@
 {{ if eq .chezmoi.os `windows` }}
-start "link-external" /B /WAIT pwsh.exe -NoLogo -Command "& '{{ .chezmoi.workingTree }}/scripts/link-external.ps1'"
+start "link-external" /B /WAIT pwsh.exe -NoLogo -Command "& '{{ .chezmoi.workingTree }}/scripts/post-apply.ps1'"
 {{ end }}
 {{ if false }}
 REM start "PSmodules-installation" /B /WAIT pwsh.exe -NoLogo -Command "& $PWD\modulesps-installation.ps1"

@@ -31,7 +31,15 @@ helper = cache --timeout=3600
 useConfigOnly = true
 name = Aleksander Heintz
 email = alxandr@alxandr.me
-signingKey = CBC4D2667013D38D
+signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA49cjFMWbxCAjTsK7H/r0biiBV0EGZHJR1xmik/arxA
+
+[gpg]
+format = ssh
+
+{{ if eq .chezmoi.os `windows` }}
+[gpg "ssh"]
+program = "C:/Program Files/1Password/app/8/op-ssh-sign.exe"
+{{ end }}
 
 [commit]
 gpgsign = true

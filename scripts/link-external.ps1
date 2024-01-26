@@ -2,8 +2,10 @@
 # ============================================================================
 # Runs after `chezmoi apply` to relocate configuration files as symlink and junction to their .config relatives.
 #
-
-## #Requires -RunAsAdministrator
+# Requires the ability to create symlinks on the local system. By default in windows, this requires administrator,
+# however, if you enable developer mode symlinks can be created without administrator access. To enable developer
+# mode, run `start ms-settings:developers`.
+#
 
 . "$PSScriptRoot\management-functions.ps1"
 
@@ -41,7 +43,7 @@
 $powershell_core = [PSCustomObject]@{
   Name      = "Powershell Core"
   Src       = Join-Path -Path $Env:USERPROFILE -ChildPath "\.config\powershell\"
-  Dst       = Join-Path -Path $PersonalDir -ChildPath "\Powershell\"
+  Dst       = "$HOME\Documents\PowerShell\"
   Recursive = $true
 }
 
