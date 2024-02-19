@@ -39,6 +39,8 @@ if ($PWD -eq "C:\Windows\System32") {
 
 Add-Path -Prepend "$HOME/.local/bin"
 
+Set-Alias vs Start-VisualStudio
+
 # prompt
 If (Test-CommandExists starship) {
   $Env:STARSHIP_CONFIG = (Join-Path $PSScriptRoot "starship.toml")
