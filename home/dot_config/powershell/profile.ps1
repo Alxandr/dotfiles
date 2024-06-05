@@ -31,11 +31,22 @@ if ($PWD -eq "C:\Windows\System32") {
   Set-Location $HOME
 }
 
+[string] $PowerShellConfigDir = "$HOME/.config/powershell"
+
 # functions
-. (Join-Path $PSScriptRoot "funcs.ps1")
+. (Join-Path $PowerShellConfigDir "funcs.ps1")
 
 # autocomplete
-. (Join-Path $PSScriptRoot "autocomplete.ps1")
+. (Join-Path $PowerShellConfigDir "autocomplete.ps1")
+
+# local
+If (Test-Path (Join-Path $PowerShellConfigDir "profile-local.ps1")) {
+  # Write-Host "Loading local profile..."
+  . (Join-Path $PowerShellConfigDir "profile-local.ps1")
+}
+# Else {
+#   Write-Host "Local profile, $(Join-Path $PowerShellConfigDir "profile-local.ps1"), not found."
+# }
 
 Add-Path -Prepend "$HOME/.local/bin"
 
@@ -74,7 +85,8 @@ If (Test-CommandExists bat) {
 
   Set-Alias cat BatDefault
   Set-Alias catmore BatMore
-} Else {
+}
+Else {
   Set-Alias cat Get-Content
   Set-Alias catmore Get-Content
 }
