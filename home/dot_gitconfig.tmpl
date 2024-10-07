@@ -39,6 +39,9 @@ signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA49cjFMWbxCAjTsK7H/r0biiBV0EGZ
 [gpg]
 format = ssh
 
+[gitbutler]
+signCommits = true
+
 {{ if eq .chezmoi.os `windows` }}
 [gpg "ssh"]
 program = "C:/Program Files/1Password/app/8/op-ssh-sign.exe"
