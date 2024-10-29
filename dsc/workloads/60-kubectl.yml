@@ -1,15 +1,22 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/bundled/config/document.vscode.json
 $schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/config/document.json
 metadata:
+  Alxandr.Workload:
+    name: KubeCTL
   Microsoft.DSC:
     securityContext: Elevated
 resources:
-  - name: Slack
+  - name: kubectl
     type: Microsoft.DSC/PowerShell
     properties:
       resources:
-        - name: Slack
+        - name: kubectl
           type: Microsoft.WinGet.DSC/WinGetPackage
           properties:
-            Id: SlackTechnologies.Slack
+            Id: Kubernetes.kubectl
+            Ensure: Present
+        - name: kubelogin
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Microsoft.Azure.Kubelogin
             Ensure: Present

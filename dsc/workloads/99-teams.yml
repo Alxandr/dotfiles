@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/bundled/config/document.vscode.json
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/config/document.json
+metadata:
+  Alxandr.Workload:
+    name: Microsoft Teams
+  Microsoft.DSC:
+    securityContext: Elevated
+resources:
+  - name: Teams
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Teams
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Microsoft.Teams
+            Ensure: Present

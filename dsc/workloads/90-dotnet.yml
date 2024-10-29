@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/bundled/config/document.vscode.json
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/config/document.json
+metadata:
+  Alxandr.Workload:
+    name: Dotnet Development
+  Microsoft.DSC:
+    securityContext: Elevated
+resources:
+  - name: dotnet
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: dotnet8
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Microsoft.DotNet.SDK.8
+            Ensure: Present
+        - name: dotnet7
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Microsoft.DotNet.SDK.7
+            Ensure: Present
+        - name: dotnet6
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Microsoft.DotNet.SDK.6
+            Ensure: Present
+
+  - name: VisualStudio
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Visual Studio
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Microsoft.VisualStudio.2022.Enterprise.Preview
+            Ensure: Present
+
+  - name: DBeaver
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: DBeaver
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: dbeaver.dbeaver
+            Ensure: Present

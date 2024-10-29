@@ -70,8 +70,6 @@ function ConvertTo-WinGeoIdObject {
 # process the operation requested to the script
 $ConfigObj = ConvertFrom-Json $Config
 
-# process the operation requested to the script
-# $ConfigObj = ConvertFrom-Json $Config
 [System.Globalization.CultureInfo]$Culture = Get-Culture
 [System.Globalization.CultureInfo]$SystemCulture = Get-WinSystemLocale
 [System.Globalization.CultureInfo]$WinUILanguageOverride = Get-WinUILanguageOverride
@@ -79,24 +77,26 @@ $ConfigObj = ConvertFrom-Json $Config
 [string]$SystemPreferredUILanguage = Get-SystemPreferredUILanguage
 [string]$SystemLanguage = Get-SystemLanguage
 
-If ('Set' -eq $Operation) {
-  [System.Globalization.CultureInfo]$TargetCulture = Get-Culture -Name $ConfigObj.id
-  If ($null -ne $ConfigObj.formats."date-time"."short-time") {
-    $TargetCulture.DateTimeFormat.ShortTimePattern = $ConfigObj.formats."date-time"."short-time"
-  }
-  If ($null -ne $ConfigObj.formats."date-time"."short-date") {
-    $TargetCulture.DateTimeFormat.ShortDatePattern = $ConfigObj.formats."date-time"."short-date"
-  }
-  If ($null -ne $ConfigObj.formats."date-time"."long-date") {
-    $TargetCulture.DateTimeFormat.LongDatePattern = $ConfigObj.formats."date-time"."long-date"
-  }
-  If ($null -ne $ConfigObj.formats."date-time"."long-time") {
-    $TargetCulture.DateTimeFormat.LongTimePattern = $ConfigObj.formats."date-time"."long-time"
-  }
-  If ($null -ne $ConfigObj.format."date-time"."full-date-time") {
-    $TargetCulture.DateTimeFormat.FullDateTimePattern = $ConfigObj.format."date-time"."full-date-time"
-  }
+[System.Globalization.CultureInfo]$TargetCulture = (Get-Culture -Name $ConfigObj.id).Clone()
+If ($null -ne $ConfigObj.formats."date-time"."short-time") {
+  $TargetCulture.DateTimeFormat.ShortTimePattern = $ConfigObj.formats."date-time"."short-time"
+}
+If ($null -ne $ConfigObj.formats."date-time"."short-date") {
+  $TargetCulture.DateTimeFormat.ShortDatePattern = $ConfigObj.formats."date-time"."short-date"
+}
+If ($null -ne $ConfigObj.formats."date-time"."long-date") {
+  $TargetCulture.DateTimeFormat.LongDatePattern = $ConfigObj.formats."date-time"."long-date"
+}
+If ($null -ne $ConfigObj.formats."date-time"."long-time") {
+  $TargetCulture.DateTimeFormat.LongTimePattern = $ConfigObj.formats."date-time"."long-time"
+}
+If ($null -ne $ConfigObj.format."date-time"."full-date-time") {
+  $TargetCulture.DateTimeFormat.FullDateTimePattern = $ConfigObj.format."date-time"."full-date-time"
+}
 
+$TargetCulture = [System.Globalization.CultureInfo]::ReadOnly($TargetCulture)
+
+If ('Set' -eq $Operation) {
   [int]$TargetLocation = $ConfigObj."home-location"
 
   Set-Culture $TargetCulture
@@ -106,6 +106,12 @@ If ('Set' -eq $Operation) {
   Set-SystemLanguage $TargetCulture.Name
   Set-WinHomeLocation $TargetLocation
   Copy-UserInternationalSettingsToSystem -WelcomeScreen $true -NewUser $true
+
+  Set-ItemProperty -Path 'HKCU:\Control Panel\International' -Name 'sShortTime' -Value $TargetCulture.DateTimeFormat.ShortTimePattern
+  Set-ItemProperty -Path 'HKCU:\Control Panel\International' -Name 'sShortDate' -Value $TargetCulture.DateTimeFormat.ShortDatePattern
+  Set-ItemProperty -Path 'HKCU:\Control Panel\International' -Name 'sLongDate' -Value $TargetCulture.DateTimeFormat.LongDatePattern
+  Set-ItemProperty -Path 'HKCU:\Control Panel\International' -Name 'sLongTime' -Value $TargetCulture.DateTimeFormat.LongTimePattern
+  Set-ItemProperty -Path 'HKCU:\Control Panel\International' -Name 'sTimeFormat' -Value $TargetCulture.DateTimeFormat.LongTimePattern
 
   $Culture = Get-Culture
   $SystemCulture = Get-WinSystemLocale
@@ -120,6 +126,7 @@ return @{
   "system-culture"               = (ConvertTo-CultureObject $SystemCulture)
   "winui-override"               = (ConvertTo-CultureObject $WinUILanguageOverride)
   "home-location"                = (ConvertTo-WinGeoIdObject $WinHomeLocation)
+  "target"                       = (ConvertTo-CultureObject $TargetCulture)
   "system-language"              = $SystemLanguage
   "system-preferred-ui-language" = $SystemPreferredUILanguage
 } | ConvertTo-Json -Depth 20 -Compress

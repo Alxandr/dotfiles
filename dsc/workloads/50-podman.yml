@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/bundled/config/document.vscode.json
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/config/document.json
+metadata:
+  Alxandr.Workload:
+    name: Podman
+  Microsoft.DSC:
+    securityContext: Elevated
+resources:
+  - name: VM
+    type: Alxandr.Windows/WindowsOptionalFeature
+    properties:
+      name: VirtualMachinePlatform
+      state: enabled
+
+  - name: HyperV
+    type: Alxandr.Windows/WindowsOptionalFeature
+    properties:
+      name: Microsoft-Hyper-V
+      state: enabled
+      all: true
+    dependsOn:
+      - "[resourceId('Alxandr.Windows/WindowsOptionalFeature', 'VM')]"
+
+  - name: Podman
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: PodmanDesktop
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: RedHat.Podman-Desktop
+            Ensure: Present
+        - name: Podman
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: RedHat.Podman
+            Ensure: Present
+    dependsOn:
+      - "[resourceId('Alxandr.Windows/WindowsOptionalFeature', 'VM')]"
+      - "[resourceId('Alxandr.Windows/WindowsOptionalFeature', 'HyperV')]"
+
+  - name: Dive
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Dive
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: wagoodman.dive
+            Ensure: Present
+
+  - name: Compose
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Compose
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Docker.DockerCompose
+            Ensure: Present

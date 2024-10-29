@@ -88,3 +88,82 @@ resources:
           properties:
             Id: AgileBits.1Password.CLI
             Ensure: Present
+
+  - name: Element
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Element
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Element.Element
+            Ensure: Present
+
+  - name: PowerToys
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: PowerToys
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Microsoft.PowerToys
+            Ensure: Present
+
+  - name: Starship
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Starship
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Starship.Starship
+            Ensure: Present
+
+  - name: zoxide
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: zoxide
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: ajeetdsouza.zoxide
+            Ensure: Present
+  - name: bat
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: bat
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: sharkdp.bat
+            Ensure: Present
+
+  - name: fzf
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: fzf
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: junegunn.fzf
+            Ensure: Present
+
+  - name: eza
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: eza
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: eza-community.eza
+            Ensure: Present
+
+  - name: GitButler
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: GitButler
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: GitButler.GitButler
+            Ensure: Present

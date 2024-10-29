@@ -80,3 +80,9 @@ Function Set-Owner {
     Write-Host $Item.FullName
   }
 }
+
+function Invoke-BootstrapWindows {
+  $ChezmoiDir = Split-Path (chezmoi source-path) -Parent
+  $BootstrapPath = Join-Path $ChezmoiDir "dsc" "bootstrap-windows.ps1"
+  & "$BootstrapPath"
+}

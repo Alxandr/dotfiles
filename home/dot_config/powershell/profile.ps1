@@ -91,3 +91,27 @@ Else {
   Set-Alias cat Get-Content
   Set-Alias catmore Get-Content
 }
+
+# eza (if it exists)
+If (Test-CommandExists eza) {
+  Function EzaDefault {
+    eza $args
+  }
+
+  Function EzaLong {
+    eza -lh $args
+  }
+
+  Function EzaTree {
+    eza --tree $args
+  }
+
+  Set-Alias ls EzaDefault
+  Set-Alias ll EzaLong
+  Set-Alias tree EzaTree
+}
+Else {
+  Set-Alias ls Get-ChildItem
+  Set-Alias ll Get-ChildItem -Force
+  Set-Alias tree Get-ChildItem -Recurse
+}
