@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/bundled/config/document.vscode.json
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/config/document.json
+metadata:
+  Microsoft.DSC:
+    securityContext: Elevated
+resources:
+  - name: US
+    type: Alxandr.Windows/InstalledLanguage
+    properties:
+      id: en-US
+      features:
+        basic-typing: true
+        handwriting: true
+        text-to-speech: true
+        ocr: true
+
+  - name: NB
+    type: Alxandr.Windows/InstalledLanguage
+    properties:
+      id: nb-NO
+      features:
+        basic-typing: true
+        handwriting: true
+        text-to-speech: true
+        ocr: true
+
+  - name: Locale Settings
+    type: Alxandr.Windows/LocaleSettings
+    properties:
+      id: en-US
+      home-location: 177 # norway
+      formats:
+        date-time:
+          short-time: HH:mm
+          short-date: dd.MM.yyyy
+          long-date: dddd d. MMMM yyyy
+          long-time: HH:mm:ss
+          full-date-time: dddd d. MMMM yyyy HH:mm:ss
+    dependsOn:
+      - "[resourceId('Alxandr.Windows/InstalledLanguage', 'US')]"
+      - "[resourceId('Alxandr.Windows/InstalledLanguage', 'NB')]"

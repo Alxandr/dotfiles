@@ -1,0 +1,90 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/bundled/config/document.vscode.json
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/config/document.json
+metadata:
+  Microsoft.DSC:
+    securityContext: Elevated
+resources:
+  - name: Git
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Git
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Git.Git
+            Ensure: Present
+
+  - name: Chezmoi
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Chezmoi
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: twpayne.chezmoi
+            Ensure: Present
+
+  - name: Pwsh
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Pwsh
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Microsoft.PowerShell
+            Ensure: Present
+
+  - name: VSCode
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Visual Studio Code
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Microsoft.VisualStudioCode
+            Ensure: Present
+
+  - name: WindowsTerminal
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Windows Terminal
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Microsoft.WindowsTerminal
+            Ensure: Present
+
+  - name: JQ
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: JQ
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: jqlang.jq
+            Ensure: Present
+
+  - name: Brave
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Brave Browser
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Brave.Brave
+            Ensure: Present
+
+  - name: 1Password
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: 1Password
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: AgileBits.1Password
+            Ensure: Present
+        - name: 1PasswordCLI
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: AgileBits.1Password.CLI
+            Ensure: Present

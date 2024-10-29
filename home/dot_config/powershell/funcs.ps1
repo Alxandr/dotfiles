@@ -55,3 +55,28 @@ Function Start-VisualStudio {
 
   Start-Process $fullPath
 }
+
+Function Set-Owner {
+  param(
+    [Parameter(Mandatory = $true, Position = 0)]
+    [string[]]$Path,
+
+    [Parameter(Mandatory = $false)]
+    [switch]$Recurse,
+
+    [Parameter(Mandatory = $false)]
+    [switch]$Force
+  )
+
+  $Items = Get-ChildItem -Path $Path -Recurse:$Recurse -Force:$Force
+  [System.Security.Principal.WindowsIdentity]$Identity = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+  [System.Security.Principal.NTAccount]$UserRef = New-Object System.Security.Principal.NTAccount($Identity.Name)
+  Write-Host "Setting owner to $($Identity.Name)"
+
+  foreach ($Item in $Items) {
+    $Acl = Get-Acl -Path $Item.FullName
+    $Acl.SetOwner($UserRef)
+    Set-Acl -Path $Item.FullName -AclObject $Acl
+    Write-Host $Item.FullName
+  }
+}

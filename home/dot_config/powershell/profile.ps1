@@ -49,6 +49,7 @@ If (Test-Path (Join-Path $PowerShellConfigDir "profile-local.ps1")) {
 # }
 
 Add-Path -Prepend "$HOME/.local/bin"
+Add-Path -Prepend "$HOME/.local/dsc"
 
 Set-Alias vs Start-VisualStudio
 

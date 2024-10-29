@@ -1,0 +1,6 @@
+{{ if eq .chezmoi.os `windows` }}
+[".local/dsc"]
+type = "archive"
+url = "https://github.com/PowerShell/DSC/releases/download/v3.0.0-preview.11/DSC-3.0.0-preview.11-x86_64-pc-windows-msvc.zip"
+exact = true
+{{ end }}

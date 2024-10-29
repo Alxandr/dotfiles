@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/bundled/config/document.vscode.json
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/config/document.json
+metadata:
+  Microsoft.DSC:
+    securityContext: Elevated
+resources:
+  - name: Slack
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Slack
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: SlackTechnologies.Slack
+            Ensure: Present

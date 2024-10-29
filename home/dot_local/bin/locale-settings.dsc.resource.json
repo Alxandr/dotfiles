@@ -1,0 +1,79 @@
+{
+  "$schema": "https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2024/04/bundled/resource/manifest.json",
+  "type": "Alxandr.Windows/LocaleSettings",
+  "description": "Manage Windows locale settings",
+  "tags": [],
+  "version": "0.0.0",
+  "get": {
+    "executable": "pwsh",
+    "args": [
+      "-NoLogo",
+      "-NonInteractive",
+      "-NoProfile",
+      "-Command",
+      "$Input | ./dsc/locale-settings.resource.ps1 get"
+    ],
+    "input": "stdin"
+  },
+  "set": {
+    "executable": "pwsh",
+    "args": [
+      "-NoLogo",
+      "-NonInteractive",
+      "-NoProfile",
+      "-Command",
+      "$Input | ./dsc/locale-settings.resource.ps1 set"
+    ],
+    "input": "stdin"
+  },
+  "schema": {
+    "embedded": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "LocaleSettings",
+      "type": "object",
+      "required": [
+        "id",
+        "home-location"
+      ],
+      "properties": {
+        "id": {
+          "description": "Language id",
+          "type": "string"
+        },
+        "home-location": {
+          "description": "Home location",
+          "type": "number"
+        },
+        "formats": {
+          "description": "Format overrides",
+          "type": "object",
+          "properties": {
+            "date-time": {
+              "description": "Date and time formats",
+              "type": "object",
+              "properties": {
+                "short-time": {
+                  "type": "string"
+                },
+                "short-date": {
+                  "type": "string"
+                },
+                "long-time": {
+                  "type": "string"
+                },
+                "long-date": {
+                  "type": "string"
+                },
+                "full-date-time": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "definitions": {}
+    }
+  }
+}
