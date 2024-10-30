@@ -167,3 +167,13 @@ resources:
           properties:
             Id: GitButler.GitButler
             Ensure: Present
+
+  - name: Spotify
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Spotify
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Spotify.Spotify
+            Ensure: Present

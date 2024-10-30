@@ -72,6 +72,7 @@ $Workloads = @(
   [Workload]::new("Windows Locale", (Join-Path $PSScriptRoot "base" "locale.yml")),
   [Workload]::new("Windows Settings", (Join-Path $PSScriptRoot "base" "settings.yml")),
   [Workload]::new("Common Windows Apps", (Join-Path $PSScriptRoot "base" "apps.yml"))
+  [Workload]::new("Visual Studio Code extensions", (Join-Path $PSScriptRoot "base" "code-extensions.yml"))
 )
 
 $WorkloadFiles = Get-ChildItem (Join-Path $PSScriptRoot "workloads") -File | Sort-Object -Property BaseName
