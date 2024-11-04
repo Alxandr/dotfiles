@@ -49,6 +49,16 @@ resources:
             Id: wagoodman.dive
             Ensure: Present
 
+  - name: Docker
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Docker
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Docker.DockerCLI
+            Ensure: Present
+
   - name: Compose
     type: Microsoft.DSC/PowerShell
     properties:

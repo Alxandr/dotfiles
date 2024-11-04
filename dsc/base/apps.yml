@@ -177,3 +177,23 @@ resources:
           properties:
             Id: Spotify.Spotify
             Ensure: Present
+
+  - name: Just
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Just
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Casey.Just
+            Ensure: Present
+
+  - name: Discord
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Discord
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Discord.Discord
+            Ensure: Present

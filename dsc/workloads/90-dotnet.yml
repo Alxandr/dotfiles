@@ -33,7 +33,7 @@ resources:
         - name: Visual Studio
           type: Microsoft.WinGet.DSC/WinGetPackage
           properties:
-            Id: Microsoft.VisualStudio.2022.Enterprise.Preview
+            Id: Microsoft.VisualStudio.2022.Professional.Preview
             Ensure: Present
 
   - name: DBeaver
@@ -44,4 +44,14 @@ resources:
           type: Microsoft.WinGet.DSC/WinGetPackage
           properties:
             Id: dbeaver.dbeaver
+            Ensure: Present
+
+  - name: ilspy
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: ILSpy
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: icsharpcode.ILSpy
             Ensure: Present
