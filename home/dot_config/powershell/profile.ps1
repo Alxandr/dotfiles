@@ -48,8 +48,11 @@ If (Test-Path (Join-Path $PowerShellConfigDir "profile-local.ps1")) {
 #   Write-Host "Local profile, $(Join-Path $PowerShellConfigDir "profile-local.ps1"), not found."
 # }
 
+$Env:PNPM_HOME = Resolve-Path "$HOME/.local/share/pnpm"
+
 Add-Path -Prepend "$HOME/.local/bin"
 Add-Path -Prepend "$HOME/.local/dsc"
+Add-Path -Prepend "$HOME/.local/share/pnpm"
 
 Set-Alias vs Start-VisualStudio
 
