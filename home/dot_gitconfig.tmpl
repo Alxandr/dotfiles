@@ -44,7 +44,12 @@ signCommits = true
 
 {{ if eq .chezmoi.os `windows` }}
 [gpg "ssh"]
-program = "C:\\Users\\ALEHEI\\AppData\\Local\\1Password\\app\\8\\op-ssh-sign.exe"
+{{ with findExecutable "op-ssh-sign" (list
+  (printf "%s%s" .chezmoi.homeDir "\\AppData\\Local\\1Password\\app\\8")
+  "C:\\Program Files\\1Password\\app\\8"
+) }}
+program = "{{ . | replaceAllRegex "\\\\" "\\\\" }}"
+{{ end }}
 {{ end }}
 
 [commit]
