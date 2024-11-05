@@ -48,11 +48,13 @@ If (Test-Path (Join-Path $PowerShellConfigDir "profile-local.ps1")) {
 #   Write-Host "Local profile, $(Join-Path $PowerShellConfigDir "profile-local.ps1"), not found."
 # }
 
-$Env:PNPM_HOME = Resolve-Path "$HOME/.local/share/pnpm"
+If (Test-Path "$HOME/.local/share/pnpm") {
+  $Env:PNPM_HOME = Resolve-Path "$HOME/.local/share/pnpm"
+  Add-Path -Prepend $Env:PNPM_HOME
+}
 
 Add-Path -Prepend "$HOME/.local/bin"
 Add-Path -Prepend "$HOME/.local/dsc"
-Add-Path -Prepend "$HOME/.local/share/pnpm"
 
 Set-Alias vs Start-VisualStudio
 
@@ -114,7 +116,15 @@ If (Test-CommandExists eza) {
   Set-Alias tree EzaTree
 }
 Else {
+  Function Get-ChildItemForce {
+    Get-ChildItem -Force
+  }
+
+  Function Get-ChildItemRecurse {
+    Get-ChildItem -Recurse
+  }
+
   Set-Alias ls Get-ChildItem
-  Set-Alias ll Get-ChildItem -Force
-  Set-Alias tree Get-ChildItem -Recurse
+  Set-Alias ll Get-ChildItemForce
+  Set-Alias tree Get-ChildItemRecurse
 }
