@@ -10,6 +10,11 @@ resources:
     type: Microsoft.DSC/PowerShell
     properties:
       resources:
+        - name: dotnet9
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: Microsoft.DotNet.SDK.9
+            Ensure: Present
         - name: dotnet8
           type: Microsoft.WinGet.DSC/WinGetPackage
           properties:
@@ -19,11 +24,6 @@ resources:
           type: Microsoft.WinGet.DSC/WinGetPackage
           properties:
             Id: Microsoft.DotNet.SDK.7
-            Ensure: Present
-        - name: dotnet6
-          type: Microsoft.WinGet.DSC/WinGetPackage
-          properties:
-            Id: Microsoft.DotNet.SDK.6
             Ensure: Present
 
   - name: VisualStudio

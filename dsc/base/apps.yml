@@ -197,3 +197,13 @@ resources:
           properties:
             Id: Discord.Discord
             Ensure: Present
+
+  - name: Signal
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: Signal
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: OpenWhisperSystems.Signal
+            Ensure: Present
