@@ -33,3 +33,8 @@ resources:
     type: Alxandr.VisualStudioCode/Extension
     properties:
       id: eamodio.gitlens
+
+  - name: Version Lense
+    type: Alxandr.VisualStudioCode/Extension
+    properties:
+      id: pflannery.vscode-versionlens
