@@ -55,3 +55,23 @@ resources:
           properties:
             Id: icsharpcode.ILSpy
             Ensure: Present
+
+  - name: MSBuild Structured Log Viewer
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: MSBuild Structured Log Viewer
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: KirillOsenkov.MSBuildStructuredLogViewer
+            Ensure: Present
+
+  - name: NuGet Package Explorer
+    type: Microsoft.DSC/PowerShell
+    properties:
+      resources:
+        - name: NuGet Package Explorer
+          type: Microsoft.WinGet.DSC/WinGetPackage
+          properties:
+            Id: 9WZDNCRDMDM3
+            Ensure: Present
