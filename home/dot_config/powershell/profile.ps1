@@ -48,10 +48,12 @@ If (Test-Path (Join-Path $PowerShellConfigDir "profile-local.ps1")) {
 #   Write-Host "Local profile, $(Join-Path $PowerShellConfigDir "profile-local.ps1"), not found."
 # }
 
-If (Test-Path "$HOME/.local/share/pnpm") {
-  $Env:PNPM_HOME = Resolve-Path "$HOME/.local/share/pnpm"
-  Add-Path -Prepend $Env:PNPM_HOME
+If (!(Test-Path "$HOME/.local/share/pnpm")) {
+  New-Item -ItemType Directory -Path "$HOME/.local/share/pnpm" -Force | Out-Null
 }
+
+$Env:PNPM_HOME = Resolve-Path "$HOME/.local/share/pnpm"
+Add-Path -Prepend $Env:PNPM_HOME
 
 Add-Path -Prepend "$HOME/.local/bin"
 Add-Path -Prepend "$HOME/.local/dsc"
