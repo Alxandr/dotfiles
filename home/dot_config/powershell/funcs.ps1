@@ -35,7 +35,7 @@ Function Test-CommandExists {
 
 Function Start-VisualStudio {
   [System.Management.Automation.PathInfo]$pwd = Get-Location
-  $candidates = Get-ChildItem -Path $pwd -Filter *.sln -Recurse -File
+  $candidates = Get-ChildItem -Path $pwd -Filter *.sln? -Recurse -File
   [string]$solution
 
   If ($candidates.Count -eq 0) {
