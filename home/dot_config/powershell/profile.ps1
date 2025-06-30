@@ -26,6 +26,9 @@
 #                              Notes
 # -----------------------------------------------------------------------------
 
+# Set UTF-8
+[console]::InputEncoding = [console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
+
 # Move to Home directory if in System32
 if ($PWD -eq "C:\Windows\System32") {
   Set-Location $HOME
