@@ -2,6 +2,12 @@
 symlinks = true
 longpaths = true
 
+{{ if eq .chezmoi.os `windows` }}
+{{ if lookPath "ssh.exe" }}
+sshCommand = "{{ lookPath "ssh.exe" | replaceAllRegex "\\\\" "/" }}"
+{{ end }}
+{{ end }}
+
 [alias]
 wip = commit -am 'WIP'
 
@@ -49,7 +55,7 @@ signCommits = true
   (printf "%s%s" .chezmoi.homeDir "\\AppData\\Local\\1Password\\app\\8")
   "C:\\Program Files\\1Password\\app\\8"
 ) }}
-program = "{{ . | replaceAllRegex "\\\\" "\\\\" }}"
+program = "{{ . | replaceAllRegex "\\\\" "/" }}"
 {{ end }}
 {{ end }}
 
