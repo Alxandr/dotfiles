@@ -34,26 +34,27 @@ Function Test-CommandExists {
 }
 
 Function Start-VisualStudio {
+
+  Param ([Parameter()][string]$filter = "")
+
   [System.Management.Automation.PathInfo]$pwd = Get-Location
   $candidates = Get-ChildItem -Path $pwd -Filter *.sln? -Recurse -File
   [string]$solution
 
-  If ($candidates.Count -eq 0) {
-    Write-Error "No solution files found in $pwd"
+  [string]$candidateList = $candidates | ForEach-Object { [System.IO.Path]::GetRelativePath($pwd.Path, $_.FullName) } | Out-String
+  $solution = $candidateList | fzf.exe --header "Select a solution file" --height "20%" --select-1 --exit-0 --query="$filter"
+
+  If ([string]::IsNullOrEmpty($solution)) {
+    Write-Error "No solution file selected."
     Return
-  }
-  ElseIf ($candidates.Count -eq 1) {
-    $solution = [System.IO.Path]::GetRelativePath($pwd.Path, $candidates[0].FullName) | Out-String
-  }
-  Else {
-    [string]$candidateList = $candidates | ForEach-Object { [System.IO.Path]::GetRelativePath($pwd.Path, $_.FullName) } | Out-String
-    $solution = $candidateList | fzf.exe --header "Select a solution file" --height "20%"
   }
 
   [string]$fullPath = Join-Path $pwd $solution
   Write-Debug "Starting: $fullPath"
 
   Start-Process $fullPath
+
+  Write-Host "Solution: $solution"
 }
 
 Function Set-Owner {
